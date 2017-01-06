@@ -7,3 +7,10 @@ question: 1.Two Sum
 
 min-Elapsed time: 6ms
 
+#The second day
+Time: Jan 6, 2017
+
+question: 3. Longest Substring Without Repeating Characters
+
+min-Elapsed time: 12ms
+
