@@ -14,3 +14,10 @@ question: 3. Longest Substring Without Repeating Characters
 
 min-Elapsed time: 12ms
 
+
+#The third day
+Time: Jan 8, 2017
+
+question: 4. Median of Two Sorted Arrays
+
+min-Elapsed time: 36ms
