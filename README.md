@@ -21,3 +21,10 @@ Time: Jan 8, 2017
 question: 4. Median of Two Sorted Arrays
 
 min-Elapsed time: 36ms
+
+#The fourth day
+Time: Jan 9, 2017
+
+question: 5. LongestPalindromicSubstring
+
+min-Elapsed time: 12ms
