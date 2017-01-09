@@ -27,4 +27,4 @@ Time: Jan 9, 2017
 
 question: 5. LongestPalindromicSubstring
 
-min-Elapsed time: 12ms
+min-Elapsed time: 6ms
