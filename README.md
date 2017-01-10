@@ -28,3 +28,11 @@ Time: Jan 9, 2017
 question: 5. LongestPalindromicSubstring
 
 min-Elapsed time: 6ms
+
+#The fifth day
+Time: Jan 10, 2017
+
+question: 6. ZigZag Conversion
+
+min-Elapsed time: 16ms
+
