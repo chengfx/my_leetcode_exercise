@@ -42,3 +42,10 @@ Time: Jan 10, 2017
 question: 7.Reverse Integer
 
 min-Elapsed time: 9ms
+
+#The seventh day
+Time: Jan 13, 2017
+
+question: 8.String to integer
+
+min-Elapsed time: 9ms
