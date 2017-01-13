@@ -37,7 +37,7 @@ question: 6. ZigZag Conversion
 min-Elapsed time: 16ms
 
 #The sixth day
-Time: Jan 10, 2017
+Time: Jan 12, 2017
 
 question: 7.Reverse Integer
 
