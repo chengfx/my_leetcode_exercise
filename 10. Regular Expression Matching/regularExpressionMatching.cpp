@@ -28,5 +28,29 @@ bool regularExpressionMatching::isMatch(string s, string p)
 	if (p.empty())
 		return false;
 
+	//Starting to check if it's matching
+	vector<int> index(1,0);
+	for (int i = 0; i < s.size(); i++)
+	{
+		vector<int> tempIndex;
+		for (int j = 0; j < index.size(); j++)
+		{
+			int temp = index[j];
+			if (temp >= p.size())
+				continue;
+			//check
+			if ((s[i] == p[temp]) || (p[temp] == '.'))
+				tempIndex.push_back(temp + 1);
+			if (p[temp] == '*')
+			{
+				int preTemp = temp - 1;
+				if (p[preTemp] == s[i] || (p[preTemp] == '.'))
+					tempIndex.push_back(temp);
+				else if (p[preTemp] == '*')
+					throw exception(" two '*'");
+			}
+		}
+		index = tempIndex;
+	}
 	
 }
