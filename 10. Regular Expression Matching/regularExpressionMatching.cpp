@@ -2,6 +2,7 @@
 #include<iostream>
 #include<vector>
 #include<exception>
+#include<unordered_map>
 
 using namespace std;
 
@@ -22,18 +23,23 @@ bool regularExpressionMatching::isMatch(string s, string p)
 	for (int i = 0; i < s.size(); i++)
 	{
 		vector<int> tempIndex;
-		for (int j = 0; j < index.size(); j++)
+		unordered_map<int,int> hashTable;
+		for (int j = 0; (j < index.size())&&(index[j]<p.size()); j++)
 		{
-			int temp = index[j];
-			if (temp >= p.size())
-				continue;
-			//check
-			int lastTemp = temp + 1;
-			if ((s[i] == p[temp]) || (p[temp] == '.'))
-				tempIndex.push_back(lastTemp);
+			int temp = index[j], lastTemp = temp + 1;
 			if ((lastTemp < p.size()) && (p[lastTemp] == '*'))
-				++temp;
-			lastTemp = temp + 1;
+			{
+				temp++;
+				lastTemp = temp + 1;
+			}
+			else if ((s[i] == p[temp]) || (p[temp] == '.'))
+			{
+				if (!hashTable.count(lastTemp))
+				{
+					hashTable[lastTemp] = 1;
+					tempIndex.push_back(lastTemp);
+				}
+			}	
 			if (p[temp] == '*')
 			{
 				int preTemp = temp - 1;
@@ -41,12 +47,24 @@ bool regularExpressionMatching::isMatch(string s, string p)
 				if ((p[preTemp] == '*') || ((lastTemp < p.size()) && (p[lastTemp] == '*')))
 					throw exception("continous *");
 				if (p[preTemp] == s[i] || (p[preTemp] == '.'))
-					tempIndex.push_back(temp);
+				{
+					if (!hashTable.count(temp))
+					{
+						hashTable[temp] = 1;
+						tempIndex.push_back(temp);
+					}
+				}
 				int k = lastTemp;
 				while (k < p.size())
 				{
 					if ((s[i] == p[k]) || (p[k] == '.'))
-						tempIndex.push_back(k + 1);
+					{
+						if (!hashTable.count(k + 1))
+						{
+							hashTable[k + 1] = 1;
+							tempIndex.push_back(k + 1);
+						}
+					}
 					++k;
 					if ((k < p.size()) && (p[k] == '*'))
 						++k;
@@ -63,12 +81,9 @@ bool regularExpressionMatching::isMatch(string s, string p)
 	for (auto& temp : index)
 	{
 		int lastTemp = temp + 1;
-		if (temp >= p.size())
-			return true;
-		if ((lastTemp == p.size()) && (p[temp] == '*'))
-			return true;
-		if (p[temp] == '*')
-			lastTemp++;
+		if (temp >= p.size()) return true;
+		if ((lastTemp == p.size()) && (p[temp] == '*')) return true;
+		if (p[temp] == '*') lastTemp++;
 		for (int k = lastTemp; k < p.size(); k += 2)
 		{
 			if (p[k] != '*')break;
