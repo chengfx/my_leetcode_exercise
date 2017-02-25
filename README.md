@@ -56,3 +56,6 @@ Time: Feb 25, 2017
 question: 10.Regular Expression Matching
 
 Elapsed time: 12ms  function"isMatch"
+
+Elapsed time: 9ms  function"DP"
+
