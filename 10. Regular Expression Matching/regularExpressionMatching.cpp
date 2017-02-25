@@ -8,7 +8,7 @@ using namespace std;
 void regularExpressionMatching::example()
 {
 	regularExpressionMatching test;
-	cout << boolalpha <<test.isMatch(string("aaa"), string("ab*a*c*a*a*a")) << endl;
+	cout << boolalpha <<test.isMatch(string(""), string("b*a*c*a*a*")) << endl;
 
 }
 
@@ -17,17 +17,6 @@ bool regularExpressionMatching::isMatch(string s, string p)
 	//Judging parameters
 	if (!p.empty() && (p[0] == '*'))
 		throw exception("the first letter of regular expression is *");
-	if (s.empty())
-	{
-		if (p.empty())
-			return true;
-		else if ((p.size() > 2) || ((p.size() == 2) && (p[1] != '*')))
-			return false;
-		else if ((p.size() == 2) && (p[1] == '*'))
-			return true;
-	}
-	if (p.empty())
-		return false;
 	//Starting to check if it's matching
 	vector<int> index(1,0);
 	for (int i = 0; i < s.size(); i++)
@@ -78,8 +67,9 @@ bool regularExpressionMatching::isMatch(string s, string p)
 			return true;
 		if ((lastTemp == p.size()) && (p[temp] == '*'))
 			return true;
-		if (((temp + 2) == p.size()) && (p[lastTemp] == '*'))
-			return true;
+		for (int k = lastTemp; k < p.size(); k += 2)
+			if ( (p[k] == '*') && (k + 1 == p.size()))
+				return true;
 	}
 	return false;
 }
