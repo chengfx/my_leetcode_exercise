@@ -74,3 +74,5 @@ question: 263.Ugly Number
 
 Elapsed time: 6ms  function "isUgly"
 
+Elapsed time: 6ms  function "isUgly1"
+
