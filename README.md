@@ -67,3 +67,10 @@ question: 77.Combinations
 
 Elapsed time: 76ms  function"recursive"
 
+#The tenth day
+Time: Mar 1, 2017
+
+question: 263.Ugly Number
+
+Elapsed time: 6ms  function "isUgly"
+
