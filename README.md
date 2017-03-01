@@ -76,3 +76,6 @@ Elapsed time: 6ms  function "isUgly"
 
 Elapsed time: 6ms  function "isUgly1"
 
+question: 264.Ugly Number2
+
+Elapsed time: 6ms
