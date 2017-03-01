@@ -5,13 +5,13 @@ using namespace std;
 void UglyNumber::example()
 {
 	UglyNumber test;
-	cout << test.isUgly(6) << endl;
+	cout << test.isUgly1(5) << endl;
 }
 
 bool UglyNumber::isUgly(int num)
 {
 	// parameter checking
-	if (num < 2)
+	if (num < 1)
 		return false;
 	//divide by 2
 	while ((num & 0x01) == 0)
@@ -24,11 +24,20 @@ bool UglyNumber::isUgly(int num)
 		temp /= 3;
 	}
 	//divide by 5
-	temp /= 5;
+	temp = num / 5;
 	while (temp * 5 == num)
 	{
 		num = temp;
 		temp /= 5;
 	}
 	return (num == 1) ? true : false;
+}
+
+bool UglyNumber::isUgly1(int num)
+{
+	if (num < 1) return false;
+	while (num % 2 == 0) num >>= 1;
+	while (num % 3 == 0) num /= 3;
+	while (num % 5 == 0) num /= 5;
+	return (num == 1);
 }
