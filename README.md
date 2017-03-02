@@ -59,6 +59,8 @@ Elapsed time: 12ms  function"isMatch"
 
 Elapsed time: 9ms  function"DP"
 
+Elapsed time: 236ms  function"recursive"
+
 
 #The ninth day
 Time: Feb 27, 2017
