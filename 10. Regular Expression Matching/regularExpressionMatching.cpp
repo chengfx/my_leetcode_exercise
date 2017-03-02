@@ -9,7 +9,7 @@ using namespace std;
 void regularExpressionMatching::example()
 {
 	regularExpressionMatching test;
-	cout << boolalpha <<test.DP(string("aa"), string("a*")) << endl;
+	cout << boolalpha <<test.recursive(string("aaccddf"), string("a*b*.*d.")) << endl;
 
 }
 
@@ -111,4 +111,29 @@ bool regularExpressionMatching::DP(string s, string p)
 				table[i][j] = table[i][j - 2] || (table[preI][j] && ((s[preI] == p[j - 2]) || (p[j - 2] == '.')));
 		}
 	return table[m][n];
+}
+
+bool regularExpressionMatching::recursive(string s,string p)
+{
+	return recursive(s, 0, p, 0);
+}
+
+bool regularExpressionMatching::recursive(string s, int sIndex ,string p, int pIndex)
+{
+	if ((s.size() <= sIndex) && (p.size() <= pIndex))
+		return true;
+	if ((p.size() <= pIndex))
+		return false;
+	bool isMatch = false;
+	if (p[pIndex + 1] == '*')
+	{
+		if ((sIndex < s.size()) && ((s[sIndex] == p[pIndex]) || (p[pIndex] == '.')))
+			isMatch = recursive(s, sIndex, p, pIndex + 2)	//skip *
+			|| recursive(s, sIndex + 1, p, pIndex);	//equal,duplicate
+		else
+			isMatch = recursive(s, sIndex, p, pIndex + 2);	//skip *
+	}
+	else if ((sIndex < s.size()) && ((s[sIndex] == p[pIndex]) || (p[pIndex] == '.')))
+		isMatch = recursive(s, sIndex + 1, p, pIndex + 1);
+	return isMatch;
 }
