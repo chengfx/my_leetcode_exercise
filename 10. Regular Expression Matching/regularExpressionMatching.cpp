@@ -120,10 +120,8 @@ bool regularExpressionMatching::recursive(string s,string p)
 
 bool regularExpressionMatching::recursive(string s, int sIndex ,string p, int pIndex)
 {
-	if ((s.size() <= sIndex) && (p.size() <= pIndex))
-		return true;
 	if ((p.size() <= pIndex))
-		return false;
+		return (s.size() <= sIndex);
 	bool isMatch = false;
 	if (p[pIndex + 1] == '*')
 	{
@@ -133,7 +131,8 @@ bool regularExpressionMatching::recursive(string s, int sIndex ,string p, int pI
 		else
 			isMatch = recursive(s, sIndex, p, pIndex + 2);	//skip *
 	}
-	else if ((sIndex < s.size()) && ((s[sIndex] == p[pIndex]) || (p[pIndex] == '.')))
-		isMatch = recursive(s, sIndex + 1, p, pIndex + 1);
+	else
+		isMatch = (sIndex < s.size()) && ((s[sIndex] == p[pIndex]) || (p[pIndex] == '.'))
+		&& recursive(s, sIndex + 1, p, pIndex + 1);
 	return isMatch;
 }
