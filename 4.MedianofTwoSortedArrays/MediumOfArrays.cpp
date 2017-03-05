@@ -79,45 +79,19 @@ bool MediumOfArrays::GetKthNumber(vector<int>& nums1, int* nums1Index, vector<in
 {
 	int nums1Length = nums1.size(), nums2Length = nums2.size();
 	//critical condition
-	if (((nums1Length == 0) && (nums2Length == 0)) || ((nums1Length + nums2Length) < kth))
+	if (kth > (nums1Length + nums2Length)) return false;
+	*nums1Index = ((kth > nums1Length) ? nums1Length : kth) - 1;
+	*nums2Index = kth - (*nums1Index) - 2;
+	int posStart = (kth - nums2Length) > 0 ? kth - nums2Length : 0, posEnd = *nums1Index, posMid = (posStart + posEnd) >> 1;
+	int label = 0;
+	while (preBigger > lastSmaller)
 	{
-		*nums1Index = -1; *nums2Index = -1;
-		return false;
+		if (label == 0) posStart = posMid + 1;
+		else posEnd = posMid - 1;
+		posMid = (posStart + posEnd) >> 1;
+		preBigger = 0;
+		lastSmaller = 0;
+		label = 0;
 	}
-	else if (nums1Length == 0)
-	{
-		*nums1Index = -1; *nums2Index = kth;
-		return false;
-	}
-	else if (nums2Length == 0)
-	{
-		*nums2Index = -1; *nums1Index = kth;
-		return false;
-	}
-	//binary search
-	int n1Start = 0, n1End = nums1Length - 1, n2Start = 0, n2End = nums2Length - 1;
-	int n1pos = 0, n2Pos = 0;
-	while ((n1Start < n1End) && (n2Start < n2End))
-	{
-		int n1Mid = (n1Start + n1End) >> 1, n2Mid = (n2Start + n2End) >> 1;
-		int num = n1Mid + n2Mid + 2;
-		if (kth < num)
-		{
-			//the array which has bigger number needs to change its  End index
-			if (nums1[n1Mid] <= nums2[n2Mid]) 
-				n2End = n2Mid - 1;
-			else
-				n1End = n1Mid - 1;
-		}
-		else
-		{
-			//the array which has smaller number needs to change its start index
-			if (nums1[n1Mid] <= nums2[n2Mid])
-				n1Start = n1Mid + 1;
-			else
-				n2Start = n2Mid + 1;
-		}
-		n1pos = n1Mid; n2Pos = n2Mid;
-	}
-	cout << "n1pos:" << n1pos << " n2pos:" << n2Pos << endl;
+	return true;
 }
