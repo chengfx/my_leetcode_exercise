@@ -72,3 +72,8 @@ double MediumOfArrays::findMedianSortedArrays(vector<int>& nums1, vector<int>& n
 	}
 	return 0;
 }
+
+bool MediumOfArrays::GetKthNumber(vector<int>& nums1, int* nums1Index, vector<int>& nums2, int* nums2Index)
+{
+
+}
