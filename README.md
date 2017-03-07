@@ -24,8 +24,6 @@ Elapsed time: 36ms function "findMedianSortedArray"
 
 Elapsed time: 79ms  function "findMedianSortedArray1"
 
-Elapsed time: 
-
 #The fourth day
 Time: Jan 9, 2017
 
