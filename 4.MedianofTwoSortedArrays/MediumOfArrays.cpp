@@ -4,11 +4,12 @@ using namespace std;
 
 void MediumOfArrays::example()
 {
-	vector<int> nums1 = {1,3,5,6,9,11 };
+	vector<int> nums1 = {1,3,5,6,13,14 };
 	vector<int> nums2 = {2,4,7,8,10,12 };
 	int a = 0, b = 0;
 	cout << "result is :" << findMedianSortedArrays(nums1, nums2) << endl;
-	GetKthNumber(nums1, &a, nums2, &b, 11);
+	GetKthNumber(nums1, &a, nums2, &b, 10);
+	cout << "a:" << a << endl << "b:" << b << endl;
 }
 double MediumOfArrays::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
 {
@@ -80,18 +81,57 @@ bool MediumOfArrays::GetKthNumber(vector<int>& nums1, int* nums1Index, vector<in
 	int nums1Length = nums1.size(), nums2Length = nums2.size();
 	//critical condition
 	if (kth > (nums1Length + nums2Length)) return false;
-	*nums1Index = ((kth > nums1Length) ? nums1Length : kth) - 1;
-	*nums2Index = kth - (*nums1Index) - 2;
-	int posStart = (kth - nums2Length) > 0 ? kth - nums2Length : 0, posEnd = *nums1Index, posMid = (posStart + posEnd) >> 1;
-	int label = 0;
-	while (preBigger > lastSmaller)
+	if (kth < nums1Length && nums1[kth - 1] <= nums2[0])
 	{
-		if (label == 0) posStart = posMid + 1;
-		else posEnd = posMid - 1;
-		posMid = (posStart + posEnd) >> 1;
-		preBigger = 0;
-		lastSmaller = 0;
-		label = 0;
+		*nums1Index = kth - 1;
+		*nums2Index = -1;
+		return true;
 	}
+	if (kth < nums2Length&&nums2[kth - 1] <= nums1[0])
+	{
+		*nums1Index = -1;
+		*nums2Index = kth - 1;
+		return true;
+	}
+	//inital
+	vector<int>::iterator min, max;
+	int minStart = 0, minEnd, maxEnd, indexLength = kth - 2;
+	int *minIndex, *maxIndex;
+	if (nums1Length <= nums2Length)
+	{
+		min = nums1.begin(); max = nums2.begin();
+		minEnd = nums1Length - 1; maxEnd = nums2Length - 1;
+		minIndex = nums1Index; maxIndex = nums2Index;
+	}
+	else
+	{
+		min = nums2.begin(); max = nums1.begin();
+		minEnd = nums2Length - 1; maxEnd = nums1Length - 1;
+		minIndex = nums2Index; maxIndex = nums1Index;
+	}
+	int preBigger, lastSmaller, label = 0;
+	*minIndex = indexLength <= maxEnd ? -1 : indexLength - maxEnd - 1;
+	//search;
+	do
+	{
+		if (label == 0) minStart = *minIndex + 1;
+		else minEnd = *minIndex - 1;
+		*minIndex = (minStart + minEnd) >> 1;
+		*maxIndex = indexLength - *minIndex;
+		preBigger = (min[*minIndex] >= max[*maxIndex]) ? min[*minIndex] : max[*maxIndex];
+		if (*minIndex == minEnd)
+			lastSmaller = preBigger;
+		else if (*maxIndex >= maxEnd)
+		{
+			lastSmaller = min[*minIndex + 1];
+			label = 0;
+		}
+		else
+		{
+			int minI = *minIndex + 1, maxI = *maxIndex + 1;
+			label = min[minI] >= max[maxI];
+			lastSmaller = label ? max[maxI] : min[minI];
+		}
+	} while (preBigger > lastSmaller);
 	return true;
 }
