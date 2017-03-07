@@ -161,3 +161,4 @@ bool MediumOfArrays::GetKthNumber(vector<int>& nums1, int* nums1Index, vector<in
 	} while (preBigger > lastSmaller);
 	return true;
 }
+
