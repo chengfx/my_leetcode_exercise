@@ -5,11 +5,12 @@ using namespace std;
 void MediumOfArrays::example()
 {
 	vector<int> nums1 = {1,3,5,6,13,14 };
-	vector<int> nums2 = {2,4,7,8,10,12 };
+	vector<int> nums2 = {2,4,7,8,10,12,14,15,16,17,18,19,20 };
 	int a = 0, b = 0;
 	cout << "result is :" << findMedianSortedArrays(nums1, nums2) << endl;
-	GetKthNumber(nums1, &a, nums2, &b, 10);
+	GetKthNumber(nums1, &a, nums2, &b, 12);
 	cout << "a:" << a << endl << "b:" << b << endl;
+	cout << "result is :" << findMedianSortedArrays1(nums1, nums2) << endl;
 }
 double MediumOfArrays::findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2)
 {
@@ -76,11 +77,36 @@ double MediumOfArrays::findMedianSortedArrays(vector<int>& nums1, vector<int>& n
 	return 0;
 }
 
+double MediumOfArrays::findMedianSortedArrays1(vector<int>& nums1, vector<int>& nums2)
+{
+	int nums1Index, nums2Index;
+	int length = nums1.size() + nums2.size();
+	bool isOdd = length & 1;
+	int kth = (length + 2) >> 1;
+	GetKthNumber(nums1, &nums1Index, nums2, &nums2Index, kth);
+	double medium;
+	if (nums1Index < 0) 
+		medium = isOdd ? nums2[nums2Index] : static_cast<double>(nums2[nums2Index] + nums2[nums2Index - 1]) / 2;
+	else if (nums2Index < 0)
+		medium = isOdd ? nums1[nums1Index] : static_cast<double>(nums1[nums1Index] + nums1[nums1Index - 1]) / 2;
+	else {
+		int max = nums2[nums2Index] > nums1[nums1Index] ? nums2[nums2Index] : nums1[nums1Index];
+		medium = isOdd ? max : static_cast<double>(nums1[nums1Index] + nums2[nums2Index]) / 2;
+	}
+	return medium;
+}
+
 bool MediumOfArrays::GetKthNumber(vector<int>& nums1, int* nums1Index, vector<int>& nums2, int* nums2Index,int kth)
 {
 	int nums1Length = nums1.size(), nums2Length = nums2.size();
 	//critical condition
 	if (kth > (nums1Length + nums2Length)) return false;
+	if (kth == (nums1Length + nums2Length))
+	{
+		*nums1Index = nums1Length - 1; 
+		*nums2Index = nums2Length - 1;
+		return true;
+	}
 	if (kth < nums1Length && nums1[kth - 1] <= nums2[0])
 	{
 		*nums1Index = kth - 1;
