@@ -19,9 +19,6 @@ MergeTwoSortedLists::ListNode* MergeTwoSortedLists::mergeTwoLists(ListNode* l1, 
 		}
 		p = p->next;
 	}
-	if (l1 == NULL && l2 != NULL)
-		p->next = l2;
-	else if (l1 != NULL && l2 == NULL)
-		p->next = l1;
+	p->next = l1 ? l1 : l2;
 	return node.next;
 }
