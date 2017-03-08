@@ -22,3 +22,11 @@ void MergeSortedArray::merge(vector<int>& nums1, int m, vector<int>& nums2, int 
 		while (len >= 0)
 			nums1[len--] = nums2[n--];
 }
+
+void MergeSortedArray::merge1(vector<int>& nums1, int m, vector<int>& nums2, int n)
+{
+	--m; --n;
+	int len = m + n + 1;
+	while (n >= 0)
+		nums1[len--] = (m >= 0 && nums1[m] >= nums2[n]) ? nums1[m--] : nums2[n--];
+}
