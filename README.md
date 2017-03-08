@@ -93,5 +93,8 @@ Elapsed time: 9ms
 
 question: 88.MergeSortedArray
 
-Elapsed time: 9ms 
+Elapsed time: 9ms function "Merge" 
+
+Elapsed time: 3ms function "Merge1"
+
 
