@@ -98,3 +98,10 @@ Elapsed time: 9ms function "Merge"
 Elapsed time: 3ms function "Merge1"
 
 
+#The 12th day
+Time: Mar 11, 2017
+
+question: 15.3Sum
+
+Elapsed time: 125ms 
+
