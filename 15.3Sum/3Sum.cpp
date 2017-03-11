@@ -7,26 +7,27 @@ using namespace std;
 vector<vector<int>> ThreeSum::threeSum(vector<int>& nums)
 {
 	vector<vector<int>> res;
-	unordered_map<int, int> isExist(3 * nums.size());
-	if (nums.size() <= 2)
-		return res;
-	int* hash2sums = new int[nums.size()];
-	for (int i = 0; i < nums.size(); i++)
-		hash2sums[i] = 0 - nums[i];
-	for (int i = 0; i < nums.size(); ++i)
+	sort(nums.begin(), nums.end());
+	for (int i = 0; i < nums.size();)
 	{
-		unordered_map<int, int> hashTable(3 * nums.size());
-		for (int j = i+1; j < nums.size(); ++j)
-		{
-			if (isExist.find[j] != isExist.end()) continue;
-			hashTable[nums[j]] = j;
-			int otherTemp = hash2sums[i] - nums[j];
-			if (hashTable.find(otherTemp) != hashTable.end())
-				if(hashTable[otherTemp]>i && hashTable[otherTemp]<j)
-					res.push_back(vector<int>{nums[i], nums[j], otherTemp});
+		int first = nums[i],front = i + 1, back = nums.size() - 1;
+		int temp = -first;
+		while (front < back) {
+			int frontNumber = nums[front], backNumber = nums[back];
+			int sum = frontNumber + backNumber;
+			if (sum > temp)
+				while (front < back&&nums[back] == backNumber)
+					--back;
+			else if (sum < temp)
+				while (front < back&&nums[front] == frontNumber)
+					++front;
+			else {
+				res.push_back(vector<int>{first, nums[front], nums[back]});
+				while (front < back&&nums[front] == frontNumber)
+					++front;
+			}
 		}
-		isExist[nums[i]] = 1;
+		while (i < nums.size() && first == nums[i]) ++i;
 	}
-	delete[]hash2sums;
 	return res;
 }
