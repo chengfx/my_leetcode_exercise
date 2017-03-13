@@ -105,3 +105,10 @@ question: 15.3Sum
 
 Elapsed time: 125ms 
 
+#The 13th day
+Time: Mar 13, 2017
+
+question: 15.4Sum
+
+Elapsed time: 35ms 
+
