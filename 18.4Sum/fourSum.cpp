@@ -30,7 +30,7 @@ vector<vector<int>> FourSum::fourSum(vector<int>& nums, int target)
 					while (thirdNumIndex < fouthNumIndex && nums[fouthNum] == fouthNum) --fouthNumIndex;
 				}
 			}
-			while (j < stop2 && nums[i] == firstNum) ++i;
+			while (j < stop2 && nums[j] == secondNum) ++j;
 		}
 		while (i < stop1 && nums[i] == firstNum) ++i;
 	}
