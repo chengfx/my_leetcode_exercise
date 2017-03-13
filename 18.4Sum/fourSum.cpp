@@ -3,11 +3,16 @@
 
 using namespace std;
 
+void FourSum::example() {
+	vector<int> input = { 0,0,0,0 };
+	fourSum(input, 0);
+}
+
 vector<vector<int>> FourSum::fourSum(vector<int>& nums, int target)
 {
 	vector<vector<int>> res;
 	sort(nums.begin(), nums.end());
-	int stop1 = nums.size() - 4, stop2 = nums.size() - 3;
+	int stop1 = nums.size() - 3, stop2 = nums.size() - 2;
 	for (int i = 0; i < stop1; )
 	{
 		int firstNum = nums[i];
@@ -27,7 +32,7 @@ vector<vector<int>> FourSum::fourSum(vector<int>& nums, int target)
 					int thirdNum = nums[thirdNumIndex], fouthNum = nums[fouthNumIndex];
 					res.push_back(vector<int>{firstNum, secondNum, thirdNum, fouthNum});
 					while (thirdNumIndex < fouthNumIndex && nums[thirdNumIndex] == thirdNum) ++thirdNumIndex;
-					while (thirdNumIndex < fouthNumIndex && nums[fouthNum] == fouthNum) --fouthNumIndex;
+					while (thirdNumIndex < fouthNumIndex && nums[fouthNumIndex] == fouthNum) --fouthNumIndex;
 				}
 			}
 			while (j < stop2 && nums[j] == secondNum) ++j;
