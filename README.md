@@ -119,3 +119,10 @@ question: 95.UniqueBinarySearchTreesII
 
 Elapsed time: 16ms 
 
+#The 15th day
+Time: Apr 16, 2017
+
+question: 9.PalindromeNum
+
+Elapsed time: 133ms 
+
