@@ -5,26 +5,19 @@
 using namespace std;
 void PalindromeNumber::example()
 {
-	cout << isPalindrome(1212) << endl;;
+	cout << isPalindrome(1221) << endl;;
 }
 
 bool PalindromeNumber::isPalindrome(int x) 
 {
-	if (x & 0x80000000)
+	if (x & 0x80000000 || (x != 0 && x % 10 == 0))
 		return false;
-	int base = 1;
-	int temp = x;
-	while (temp /= 10)
-		base *= 10;
-	int rightBase = 1;
-	while (rightBase < base)
+	int temp = 0;
+	while (x > temp)
 	{
-		int left = x / base;
-		int right = x / rightBase;
-		if ((left % 10) != (right % 10))
-			return false;
-		rightBase *= 10;
-		base /= 10;
+		temp *= 10;
+		temp += x % 10;
+		x /= 10;
 	}
-	return true;
+	return x == temp || x == (temp/10);
 }
